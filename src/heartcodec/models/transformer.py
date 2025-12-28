@@ -106,7 +106,6 @@ class LlamaAttention(nn.Module):
             seq_len_for_rope, device=x.device, dtype=x.dtype
         )
 
-        # 高效矢量化旋转：避免逐通道步长索引
         def apply_rope_vec(tensor):
             head = tensor[..., :rope_dim]
             tail = tensor[..., rope_dim:]
@@ -130,7 +129,7 @@ class LlamaAttention(nn.Module):
             attn_mask_sdpa = None
             if attention_mask is not None:
                 m = attention_mask
-                # 期望 bool 屏蔽或加性掩码，尽量使用可广播的最小形状
+
                 if m.dim() == 2 and m.shape == (b, s):  # [b, s]
                     m = m[:, None, None, :]  # [b,1,1,s]
                 elif m.dim() == 3 and m.shape[-2] == 1:  # [b,1,s]
@@ -138,7 +137,7 @@ class LlamaAttention(nn.Module):
                 elif m.dim() == 3 and m.shape[-2] == t:  # [b,t,s]
                     m = m[:, None, :, :]  # [b,1,t,s]
                 elif m.dim() == 4 and m.shape[1] == 1:  # [b,1,t,s] or [b,1,1,s]
-                    pass  # 已可广播
+                    pass
                 attn_mask_sdpa = m
 
             out = F.scaled_dot_product_attention(
@@ -225,8 +224,6 @@ class LlamaTransformerBlock(nn.Module):
             )
         self.mlp_norm = RMSNorm(dim, 1e-6)
         self.mlp = LlamaMLP(dim, multiple_of=mlp_multiple_of, dropout=dropout)
-
-        # ada_norm_single 支持
         self.use_ada_layer_norm_single = use_ada_layer_norm_single
         if self.use_ada_layer_norm_single:
             self.scale_shift_table = nn.Parameter(torch.randn(6, dim) / dim**0.5)
@@ -307,7 +304,6 @@ class LlamaTransformer(nn.Module):
         self.dropout = dropout
 
         self.proj_in = ProjectLayer(in_channels, inner_dim, kernel_size=3)
-        # Llama不显式加绝对PE，使用RoPE；此处保持接口兼容，不另加sinusoidal
 
         use_ada_single = norm_type == "ada_norm_single"
         self.transformer_blocks = nn.ModuleList(
@@ -352,7 +348,6 @@ class LlamaTransformer(nn.Module):
             torch.randn(2, inner_dim_2) / inner_dim_2**0.5
         )
         self.proj_out = ProjectLayer(inner_dim_2, out_channels, kernel_size=3)
-        # 与原实现一致：使用 PixArt-Alpha 风格的 AdaLN-single 生成 embedded_timestep 用于输出调制
         self.adaln_single = AdaLayerNormSingleFlow(inner_dim)
         self.adaln_single_2 = AdaLayerNormSingleFlow(inner_dim_2)
 
@@ -363,8 +358,6 @@ class LlamaTransformer(nn.Module):
     ):
         s = self.proj_in(hidden_states)
 
-        # -------------- stage1: backbone transformer model --------------
-        # 生成 embedded_timestep（与原模型相同的接口）
         embedded_timestep = None
         timestep_mod = None
         if self.adaln_single is not None and timestep is not None:
@@ -375,8 +368,6 @@ class LlamaTransformer(nn.Module):
         for blk in self.transformer_blocks:
             s = blk(s, timestep=timestep_mod)
 
-        # 输出调制，保持与原模型一致
-        # embedded_timestep 简化：若无，置零
         if embedded_timestep is None:
             embedded_timestep = torch.zeros(
                 s.size(0), s.size(-1), device=s.device, dtype=s.dtype
@@ -388,7 +379,6 @@ class LlamaTransformer(nn.Module):
         s = self.norm_out(s)
         s = s * (1 + scale) + shift
 
-        # -------------- stage2: wide diffusion head --------------
         x = torch.cat([hidden_states, s], dim=-1)
         x = self.connection_proj(x)
 
@@ -418,7 +408,6 @@ class LlamaTransformer(nn.Module):
         return out
 
 
-# 下面两类来自 PixArt-Alpha 风格的 AdaLN-single 实现（做了最小依赖改造）
 class PixArtAlphaCombinedFlowEmbeddings(nn.Module):
     def __init__(self, embedding_dim: int, size_emb_dim: int):
         super().__init__()

@@ -70,7 +70,7 @@ class HeartCodec(PreTrainedModel):
         )  # B, T, 64
         first_latent_length = 0
         first_latent_codes_length = 0
-        min_samples = int(duration * 12.5)  # 20s ---> 500 frames
+        min_samples = int(duration * 12.5)
         hop_samples = min_samples // 93 * 80
         ovlp_samples = min_samples - hop_samples
         ovlp_frames = ovlp_samples * 2
@@ -93,14 +93,13 @@ class HeartCodec(PreTrainedModel):
             while codes.shape[-1] < len_codes:
                 codes = torch.cat([codes, codes], -1)
             codes = codes[:, :, 0:len_codes]
-        latent_length = int(duration * 25)  # min_samples*2
+        latent_length = int(duration * 25)
         latent_list = []
         with torch.autocast(device_type="cuda", dtype=torch.float16):
             for sinx in range(0, codes.shape[-1] - hop_samples + 1, hop_samples):
                 codes_input = []
                 codes_input.append(codes[:, :, sinx : sinx + min_samples])
                 if sinx == 0 or ovlp_frames == 0:
-                    # print("Processing {} to {}".format(sinx/self.sample_rate, (sinx + min_samples)/self.sample_rate))
                     incontext_length = first_latent_length
                     latents = self.flow_matching.inference_codes(
                         codes_input,
@@ -114,7 +113,6 @@ class HeartCodec(PreTrainedModel):
                     )
                     latent_list.append(latents)
                 else:
-                    # print("Processing {} to {}".format(sinx/self.sample_rate, (sinx + min_samples)/self.sample_rate))
                     true_latent = latent_list[-1][:, -ovlp_frames:, :]
                     len_add_to_latent = latent_length - true_latent.shape[1]  #
                     incontext_length = true_latent.shape[1]
@@ -152,7 +150,6 @@ class HeartCodec(PreTrainedModel):
             for i in range(len(latent_list)):
                 latent = latent_list[i]
                 bsz, t, f = latent.shape
-                # latent = latent.reshape(bsz, ch//2, t, f)
 
                 latent = latent.reshape(
                     latent.shape[0], latent.shape[1], 2, latent.shape[2] // 2

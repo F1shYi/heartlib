@@ -37,7 +37,7 @@ def llama3_2_300M() -> torchtune.modules.transformer.TransformerDecoder:
         norm_eps=1e-5,
         rope_base=500_000,
         scale_factor=32,
-    )  # 减少了num_heads和num_kv_heads之间的倍速，提升了精确度，但降低了效率
+    )
 
 
 FLAVORS = {
@@ -116,11 +116,10 @@ class HeartMuLa(PreTrainedModel):
             )
         )
         self.muq_linear = nn.Linear(config.muq_dim, backbone_dim)
-        self.random_type = "no_drop"  # 'k_style' or 'batch_style'
+        self.random_type = "no_drop"
         self.post_init()
 
     def setup_caches(self, max_batch_size: int):
-        """Setup KV caches and return a causal mask."""
         dtype = next(self.parameters()).dtype
         device = next(self.parameters()).device
 
@@ -174,10 +173,6 @@ class HeartMuLa(PreTrainedModel):
         assert self.backbone.caches_are_enabled(), "backbone caches are not enabled"
         curr_backbone_mask = _index_causal_mask(self.backbone_causal_mask, input_pos)
 
-        # +++ CFG START: 为推理准备无条件嵌入 +++
-        # 在推理时，我们需要为有条件和无条件两路都准备输入
-        # B 应该是 2 * actual_batch_size
-        # 前半部分是有条件，后半部分是无条件
         uncond_mask = None
         if cfg_scale > 1.0 and b > 1:
             actual_B = b // 2
@@ -189,7 +184,6 @@ class HeartMuLa(PreTrainedModel):
             )
 
         embeds = self._embed_tokens(tokens, uncond_mask=uncond_mask)
-        # +++ CFG END +++
 
         masked_embeds = embeds * tokens_mask.unsqueeze(-1)
         h = masked_embeds.sum(dim=2)  # merge
@@ -200,11 +194,11 @@ class HeartMuLa(PreTrainedModel):
             continuous_segments = continuous_segments.to(
                 dtype=target_dtype, device=target_device
             )
-            continuous_segments = self.muq_linear(continuous_segments)  # B, 1, D
+            continuous_segments = self.muq_linear(continuous_segments)
             if uncond_mask is not None:
                 uncond_embed = self.unconditional_text_embedding(
                     torch.zeros(1, device=tokens.device, dtype=torch.long)
-                )  # Shape: (1, D)
+                )
                 mask_expanded = uncond_mask.view(b, 1).expand_as(continuous_segments)
                 continuous_segments = torch.where(
                     mask_expanded, uncond_embed, continuous_segments
@@ -212,7 +206,6 @@ class HeartMuLa(PreTrainedModel):
             batch_indices = torch.arange(h.shape[0], device=h.device)
             h[batch_indices, starts] = continuous_segments.to(h.dtype)
 
-        # 保证与 backbone 设备一致，避免 torchtune kv_cache 在 CPU/GPU 不一致
         backbone_device = (
             next(self.backbone.parameters()).device
             if any(p.requires_grad for p in self.backbone.parameters())
@@ -273,14 +266,9 @@ class HeartMuLa(PreTrainedModel):
                 guided_ci = uncond_ci + (cond_ci - uncond_ci) * cfg_scale
 
                 ci_sample = sample_topk(guided_ci, topk, temperature)
-                # ci_sample = sample_topk(guided_ci, curr_topk, curr_temp)
-                """add layered sampling"""
-
                 ci_sample = ci_sample.repeat(2, 1)
             else:
                 ci_sample = sample_topk(ci_logits, topk, temperature)
-                # ci_sample = sample_topk(ci_logits, curr_topk, curr_temp)
-                """add layered sampling"""
             ci_embed = self._embed_audio(i, ci_sample)
             curr_h = ci_embed
             curr_sample = torch.cat([curr_sample, ci_sample], dim=1)
@@ -310,19 +298,16 @@ class HeartMuLa(PreTrainedModel):
         self, tokens: torch.Tensor, uncond_mask: torch.Tensor | None
     ) -> torch.Tensor:
         B, S, _ = tokens.size()
-        text_embeds = self.text_embeddings(
-            tokens[:, :, -1]
-        )  # the last layer is text token
+        text_embeds = self.text_embeddings(tokens[:, :, -1])
 
         if uncond_mask is not None:
-            # 获取可学习的无条件嵌入向量
             uncond_text_embed = self.unconditional_text_embedding(
                 torch.zeros(1, device=tokens.device, dtype=torch.long)
-            )  # Shape (1, D)
+            )
             mask_expanded = uncond_mask.view(B, 1, 1).expand_as(text_embeds)
             text_embeds = torch.where(
                 mask_expanded,
-                uncond_text_embed,  # broadcasted to (B, S, D)
+                uncond_text_embed,
                 text_embeds,
             )
 

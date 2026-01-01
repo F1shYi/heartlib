@@ -1,4 +1,9 @@
 
+## TODO List
+1. 支持MuQ-Mulan
+2. 支持Transcriptor
+
+
 ## 环境配置
 
 0. 克隆仓库

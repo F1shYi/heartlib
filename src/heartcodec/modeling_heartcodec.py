@@ -95,49 +95,49 @@ class HeartCodec(PreTrainedModel):
             codes = codes[:, :, 0:len_codes]
         latent_length = int(duration * 25)
         latent_list = []
-        with torch.autocast(device_type="cuda", dtype=torch.float16):
-            for sinx in range(0, codes.shape[-1] - hop_samples + 1, hop_samples):
-                codes_input = []
-                codes_input.append(codes[:, :, sinx : sinx + min_samples])
-                if sinx == 0 or ovlp_frames == 0:
-                    incontext_length = first_latent_length
-                    latents = self.flow_matching.inference_codes(
-                        codes_input,
-                        first_latent,
-                        latent_length,
-                        incontext_length,
-                        guidance_scale=guidance_scale,
-                        num_steps=num_steps,
-                        disable_progress=disable_progress,
-                        scenario="other_seg",
-                    )
-                    latent_list.append(latents)
-                else:
-                    true_latent = latent_list[-1][:, -ovlp_frames:, :]
-                    len_add_to_latent = latent_length - true_latent.shape[1]  #
-                    incontext_length = true_latent.shape[1]
-                    true_latent = torch.cat(
-                        [
-                            true_latent,
-                            torch.randn(
-                                true_latent.shape[0],
-                                len_add_to_latent,
-                                true_latent.shape[-1],
-                            ).to(device),
-                        ],
-                        1,
-                    )
-                    latents = self.flow_matching.inference_codes(
-                        codes_input,
+
+        for sinx in range(0, codes.shape[-1] - hop_samples + 1, hop_samples):
+            codes_input = []
+            codes_input.append(codes[:, :, sinx : sinx + min_samples])
+            if sinx == 0 or ovlp_frames == 0:
+                incontext_length = first_latent_length
+                latents = self.flow_matching.inference_codes(
+                    codes_input,
+                    first_latent,
+                    latent_length,
+                    incontext_length,
+                    guidance_scale=guidance_scale,
+                    num_steps=num_steps,
+                    disable_progress=disable_progress,
+                    scenario="other_seg",
+                )
+                latent_list.append(latents)
+            else:
+                true_latent = latent_list[-1][:, -ovlp_frames:, :]
+                len_add_to_latent = latent_length - true_latent.shape[1]  #
+                incontext_length = true_latent.shape[1]
+                true_latent = torch.cat(
+                    [
                         true_latent,
-                        latent_length,
-                        incontext_length,
-                        guidance_scale=guidance_scale,
-                        num_steps=num_steps,
-                        disable_progress=disable_progress,
-                        scenario="other_seg",
-                    )
-                    latent_list.append(latents)
+                        torch.randn(
+                            true_latent.shape[0],
+                            len_add_to_latent,
+                            true_latent.shape[-1],
+                        ).to(device),
+                    ],
+                    1,
+                )
+                latents = self.flow_matching.inference_codes(
+                    codes_input,
+                    true_latent,
+                    latent_length,
+                    incontext_length,
+                    guidance_scale=guidance_scale,
+                    num_steps=num_steps,
+                    disable_progress=disable_progress,
+                    scenario="other_seg",
+                )
+                latent_list.append(latents)
 
         latent_list = [l.float() for l in latent_list]
         latent_list[0] = latent_list[0][:, first_latent_length:, :]

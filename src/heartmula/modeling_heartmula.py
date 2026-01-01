@@ -116,7 +116,6 @@ class HeartMuLa(PreTrainedModel):
             )
         )
         self.muq_linear = nn.Linear(config.muq_dim, backbone_dim)
-        self.random_type = "no_drop"
         self.post_init()
 
     def setup_caches(self, max_batch_size: int):
@@ -156,18 +155,6 @@ class HeartMuLa(PreTrainedModel):
         continuous_segments: torch.Tensor = None,
         starts=None,
     ) -> torch.Tensor:
-        """
-        Args:
-            tokens: (batch_size, seq_len, audio_num_codebooks+1)
-            tokens_mask: (batch_size, seq_len, audio_num_codebooks+1)
-            input_pos: (batch_size, seq_len) positions for each token
-            mask: (batch_size, seq_len, max_seq_len
-
-        Returns:
-            (batch_size, audio_num_codebooks) sampled tokens
-        """
-
-        dtype = next(self.parameters()).dtype
         b, s, _ = tokens.size()
 
         assert self.backbone.caches_are_enabled(), "backbone caches are not enabled"
@@ -184,16 +171,9 @@ class HeartMuLa(PreTrainedModel):
             )
 
         embeds = self._embed_tokens(tokens, uncond_mask=uncond_mask)
-
         masked_embeds = embeds * tokens_mask.unsqueeze(-1)
-        h = masked_embeds.sum(dim=2)  # merge
+        h = masked_embeds.sum(dim=2, dtype=embeds.dtype)  # merge
         if continuous_segments is not None:
-            """during the inference, the continuous_segments only be used in the first inference step"""
-            target_dtype = self.muq_linear.weight.dtype
-            target_device = self.muq_linear.weight.device
-            continuous_segments = continuous_segments.to(
-                dtype=target_dtype, device=target_device
-            )
             continuous_segments = self.muq_linear(continuous_segments)
             if uncond_mask is not None:
                 uncond_embed = self.unconditional_text_embedding(
@@ -204,28 +184,8 @@ class HeartMuLa(PreTrainedModel):
                     mask_expanded, uncond_embed, continuous_segments
                 )
             batch_indices = torch.arange(h.shape[0], device=h.device)
-            h[batch_indices, starts] = continuous_segments.to(h.dtype)
-
-        backbone_device = (
-            next(self.backbone.parameters()).device
-            if any(p.requires_grad for p in self.backbone.parameters())
-            else h.device
-        )
-        if h.device != backbone_device:
-            h = h.to(backbone_device)
-        if input_pos.device != backbone_device:
-            input_pos = input_pos.to(backbone_device)
-        if curr_backbone_mask.device != backbone_device:
-            curr_backbone_mask = curr_backbone_mask.to(backbone_device)
-        h = h.to(
-            dtype=self.backbone.layers[0].attn.q_proj.weight.dtype,
-            device=self.backbone.layers[0].attn.q_proj.weight.device,
-        )
-
-        h = self.backbone(h, input_pos=input_pos, mask=curr_backbone_mask).to(
-            dtype=dtype
-        )
-
+            h[batch_indices, starts] = continuous_segments
+        h = self.backbone(h, input_pos=input_pos, mask=curr_backbone_mask)
         last_h = h[:, -1, :]  # the last frame
         c0_logits = self.codebook0_head(last_h)  # only predict the audio part
 
@@ -234,7 +194,6 @@ class HeartMuLa(PreTrainedModel):
             cond_logits = c0_logits[:actual_B, :]
             uncond_logits = c0_logits[actual_B:, :]
             guided_logits = uncond_logits + (cond_logits - uncond_logits) * cfg_scale
-
             c0_sample = sample_topk(guided_logits, topk, temperature)
             c0_sample = c0_sample.repeat(
                 2, 1
@@ -257,7 +216,7 @@ class HeartMuLa(PreTrainedModel):
             curr_decoder_mask = _index_causal_mask(self.decoder_causal_mask, curr_pos)
             decoder_h = self.decoder(
                 self.projection(curr_h), input_pos=curr_pos, mask=curr_decoder_mask
-            ).to(dtype=dtype)
+            )
             ci_logits = torch.mm(decoder_h[:, -1, :], self.audio_head[i - 1])
             if cfg_scale > 1.0 and b > 1 and (b % 2 == 0):
                 actual_B = b // 2

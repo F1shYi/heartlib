@@ -1,5 +1,6 @@
-from src.pipeline import HeartMuLaGenPipeline
+from src.pipelines.music_generation import HeartMuLaGenPipeline
 import argparse
+import torch
 
 
 def parse_args():
@@ -18,11 +19,12 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    pipe = HeartMuLaGenPipeline.from_pretrained(args.model_path)
+    pipe = HeartMuLaGenPipeline.from_pretrained(
+        args.model_path, torch.device("cuda"), torch.bfloat16
+    )
     pipe(
         {
             "lyrics": args.lyrics,
-            "ref_audio": None,
             "tags": args.tags,
         },
         max_audio_length_ms=args.max_audio_length_ms,

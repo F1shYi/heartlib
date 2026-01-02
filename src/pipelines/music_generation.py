@@ -36,7 +36,7 @@ class HeartMuLaGenPipeline(Pipeline):
         device: torch.device,
         dtype: torch.dtype,
     ):
-        super().__init__(model, device=device, dtype=dtype)
+        super().__init__(model, dtype=dtype)
         self.model = model
         self.audio_codec = audio_codec
         self.muq_mulan = muq_mulan
@@ -217,7 +217,9 @@ class HeartMuLaGenPipeline(Pipeline):
             )
 
         if os.path.exists(heartmula_path := os.path.join(pretrained_path, "heartmula")):
-            heartmula = HeartMuLa.from_pretrained(heartmula_path, dtype=dtype)
+            heartmula = HeartMuLa.from_pretrained(
+                heartmula_path, dtype=dtype, load_in_4bit=True
+            )
         else:
             raise FileNotFoundError(
                 f"Expected to find checkpoint for HeartMuLa at {heartmula_path} but not found. Please check your folder {pretrained_path}."

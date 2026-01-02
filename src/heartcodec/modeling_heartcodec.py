@@ -145,42 +145,37 @@ class HeartCodec(PreTrainedModel):
         hop_samples = min_samples // 93 * 80
         ovlp_samples = min_samples - hop_samples
 
-        with torch.no_grad():
-            output = None
-            for i in range(len(latent_list)):
-                latent = latent_list[i]
-                bsz, t, f = latent.shape
+        output = None
+        for i in range(len(latent_list)):
+            latent = latent_list[i]
+            bsz, t, f = latent.shape
 
-                latent = latent.reshape(
-                    latent.shape[0], latent.shape[1], 2, latent.shape[2] // 2
-                ).permute(0, 2, 1, 3)
-                latent = latent.reshape(
-                    latent.shape[0] * 2, latent.shape[2], latent.shape[3]
-                )
-                cur_output = (
-                    self.scalar_model.decode(latent.transpose(1, 2))
-                    .squeeze(0)
-                    .squeeze(1)
-                )  # 1 512 256
+            latent = latent.reshape(
+                latent.shape[0], latent.shape[1], 2, latent.shape[2] // 2
+            ).permute(0, 2, 1, 3)
+            latent = latent.reshape(
+                latent.shape[0] * 2, latent.shape[2], latent.shape[3]
+            )
+            cur_output = (
+                self.scalar_model.decode(latent.transpose(1, 2)).squeeze(0).squeeze(1)
+            )  # 1 512 256
 
-                cur_output = cur_output[:, 0:min_samples].detach().cpu()  # B, T
-                if cur_output.dim() == 3:
-                    cur_output = cur_output[0]
+            cur_output = cur_output[:, 0:min_samples].detach().cpu()  # B, T
+            if cur_output.dim() == 3:
+                cur_output = cur_output[0]
 
-                if output is None:
-                    output = cur_output
+            if output is None:
+                output = cur_output
+            else:
+                if ovlp_samples == 0:
+                    output = torch.cat([output, cur_output], -1)
                 else:
-                    if ovlp_samples == 0:
-                        output = torch.cat([output, cur_output], -1)
-                    else:
-                        ov_win = torch.from_numpy(
-                            np.linspace(0, 1, ovlp_samples)[None, :]
-                        )
-                        ov_win = torch.cat([ov_win, 1 - ov_win], -1)
-                        output[:, -ovlp_samples:] = (
-                            output[:, -ovlp_samples:] * ov_win[:, -ovlp_samples:]
-                            + cur_output[:, 0:ovlp_samples] * ov_win[:, 0:ovlp_samples]
-                        )
-                        output = torch.cat([output, cur_output[:, ovlp_samples:]], -1)
-            output = output[:, 0:target_len]
+                    ov_win = torch.from_numpy(np.linspace(0, 1, ovlp_samples)[None, :])
+                    ov_win = torch.cat([ov_win, 1 - ov_win], -1)
+                    output[:, -ovlp_samples:] = (
+                        output[:, -ovlp_samples:] * ov_win[:, -ovlp_samples:]
+                        + cur_output[:, 0:ovlp_samples] * ov_win[:, 0:ovlp_samples]
+                    )
+                    output = torch.cat([output, cur_output[:, ovlp_samples:]], -1)
+        output = output[:, 0:target_len]
         return output

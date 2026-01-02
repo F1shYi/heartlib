@@ -60,7 +60,7 @@ class FlowMatching(nn.Module):
         true_latents,
         latent_length,
         incontext_length,
-        guidance_scale=2,
+        guidance_scale=2.0,
         num_steps=20,
         disable_progress=True,
         scenario="start_seg",

@@ -205,13 +205,13 @@ class HeartMuLa(PreTrainedModel):
 
         self.decoder.reset_caches()
         curr_h = torch.cat([last_h.unsqueeze(1), c0_embed], dim=1)
-
         curr_sample = c0_sample.clone()
         curr_pos = (
             torch.arange(0, curr_h.size(1), device=curr_h.device)
             .unsqueeze(0)
             .repeat(curr_h.size(0), 1)
         )
+        curr_h = curr_h.to(embeds.dtype)
         for i in range(1, self.config.audio_num_codebooks):
             curr_decoder_mask = _index_causal_mask(self.decoder_causal_mask, curr_pos)
             decoder_h = self.decoder(

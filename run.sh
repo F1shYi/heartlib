@@ -5,5 +5,5 @@ python demo.py \
     --save_path ./samples/result.wav \
     --topk 50 \
     --temperature 1.0 \
-    --cfg_scale 1.5 \
+    --cfg_scale 1.0 \
     --max_audio_length_ms 30_000

@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from tqdm import tqdm
 import torchaudio
 import json
+from transformers import BitsAndBytesConfig
 
 
 @dataclass
@@ -204,7 +205,11 @@ class HeartMuLaGenPipeline(Pipeline):
 
     @classmethod
     def from_pretrained(
-        cls, pretrained_path: str, device: torch.device, dtype: torch.dtype
+        cls,
+        pretrained_path: str,
+        device: torch.device,
+        dtype: torch.dtype,
+        bnb_config: Optional[BitsAndBytesConfig] = None,
     ):
 
         if os.path.exists(
@@ -218,7 +223,7 @@ class HeartMuLaGenPipeline(Pipeline):
 
         if os.path.exists(heartmula_path := os.path.join(pretrained_path, "heartmula")):
             heartmula = HeartMuLa.from_pretrained(
-                heartmula_path, dtype=dtype, load_in_4bit=True
+                heartmula_path, dtype=dtype, quantization_config=bnb_config
             )
         else:
             raise FileNotFoundError(

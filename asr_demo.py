@@ -1,4 +1,4 @@
-from src.pipelines.lyrics_transcription import HeartTranscriptorPipeline
+from heartlib.pipelines.lyrics_transcription import HeartTranscriptorPipeline
 import torch
 
 if __name__ == "__main__":

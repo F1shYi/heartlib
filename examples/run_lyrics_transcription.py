@@ -1,14 +1,25 @@
-from heartlib.pipelines.lyrics_transcription import HeartTranscriptorPipeline
+from heartlib import HeartTranscriptorPipeline
+import argparse
 import torch
 
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model_path", type=str, required=True)
+    parser.add_argument("--music_path", type=str, default="./.assets/output.wav")
+
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
+    args = parse_args()
     pipe = HeartTranscriptorPipeline.from_pretrained(
-        "/turing_music_fs/music_data/ckpts/heartmula-gen/",
+        args.model_path,
         device=torch.device("cuda"),
         dtype=torch.float16,
     )
     result = pipe(
-        "/root/code/heartmula_gen/separated/htdemucs/result/vocals.wav",
+        args.music_path,
         **{
             "max_new_tokens": 256,
             "num_beams": 2,
@@ -21,5 +32,3 @@ if __name__ == "__main__":
         },
     )
     print(result)
-
-    print(result["text"])

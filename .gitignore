@@ -5,3 +5,4 @@ checkpoint/
 **.wav
 **.mp3
 .vscode/
+**.egg-info/

@@ -191,10 +191,9 @@ class HeartMuLaGenPipeline(Pipeline):
                     continuous_segments=None,
                     starts=None,
                 )
-            frames.append(curr_token[0:1,])
             if torch.any(curr_token[0:1, :] >= self.config.audio_eos_id):
                 break
-
+            frames.append(curr_token[0:1,])
         frames = torch.stack(frames).permute(1, 2, 0).squeeze(0)
         wav = self.audio_codec.detokenize(frames)
         return {"wav": wav}

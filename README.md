@@ -6,13 +6,13 @@
 </p>
 
 <p align="center">
-    <a href="https://map-yue.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="https://arxiv.org/abs/2503.08638">Paper</a>
+    <a href="https://heartmula.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="coming soon">Paper</a>
     <br>
-    <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-en-cot">YuE-s1-7B-anneal-en-cot 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-en-icl">YuE-s1-7B-anneal-en-icl 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-jp-kr-cot">YuE-s1-7B-anneal-jp-kr-cot 🤗</a>
-    <br>
-    <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-jp-kr-icl">YuE-s1-7B-anneal-jp-kr-icl 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-zh-cot">YuE-s1-7B-anneal-zh-cot 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-zh-icl">YuE-s1-7B-anneal-zh-icl 🤗</a>
-    <br>
-    <a href="https://huggingface.co/m-a-p/YuE-s2-1B-general">YuE-s2-1B-general 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-upsampler">YuE-upsampler 🤗</a>
+    <a href="https://huggingface.co/m-a-p/YuE-s2-1B-general">HeartMuLa-7B 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-upsampler">HeartMuLa-3B 🤗</a>
+    <picture>
+        <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
+        <img src="./.assets/badge.svg" width="20px">
+    </picture>
 </p>
 
 ---
@@ -107,3 +107,6 @@ The music generation model and all associated assets are provided for non-commer
 Users are solely responsible for ensuring that the generated content does not infringe upon any third-party copyrights or other intellectual property rights.
 
 ## Citation
+
+## Contact Us
+If you are interested in HeartMuLa, feel free to reach us at heartmula.ai@gmail.com

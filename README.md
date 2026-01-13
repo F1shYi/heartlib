@@ -4,8 +4,8 @@
         <img src="./.assets/logo.png" width="40%">
     </picture>
     <picture>
-        <source srcset="./.assets/pku_logo.png" media="(prefers-color-scheme: dark)">
-        <img src="./.assets/pku_logo.png" width="40%">
+        <source srcset="./.assets/black_pku_logo.png" media="(prefers-color-scheme: dark)">
+        <img src="./.assets/black_pku_logo.png" width="35%">
     </picture>
 </p>
 

@@ -1,3 +1,21 @@
+<p align="center">
+    <picture>
+        <source srcset="./.assets/logo.png" media="(prefers-color-scheme: dark)">
+        <img src="./.assets/logo.png" width="40%">
+    </picture>
+</p>
+
+<p align="center">
+    <a href="https://map-yue.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="https://arxiv.org/abs/2503.08638">Paper</a>
+    <br>
+    <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-en-cot">YuE-s1-7B-anneal-en-cot 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-en-icl">YuE-s1-7B-anneal-en-icl 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-jp-kr-cot">YuE-s1-7B-anneal-jp-kr-cot 🤗</a>
+    <br>
+    <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-jp-kr-icl">YuE-s1-7B-anneal-jp-kr-icl 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-zh-cot">YuE-s1-7B-anneal-zh-cot 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-s1-7B-anneal-zh-icl">YuE-s1-7B-anneal-zh-icl 🤗</a>
+    <br>
+    <a href="https://huggingface.co/m-a-p/YuE-s2-1B-general">YuE-s2-1B-general 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-upsampler">YuE-upsampler 🤗</a>
+</p>
+
+---
 # HeartMuLa: A Family of Open Sourced Music Foundation Models
 
 HeartMuLa is a family of open sourced music foundation models including: 
@@ -20,9 +38,6 @@ TODOs:
 
 [√] Release inference code and pretrained checkpoints of HeartCodec, HeartMuLa and HeartTranscriptor.
 
-## Quickstart
-
-Check our [Colab Demo](https://colab.research.google.com/drive/1fREqaIvfagb5GHlzEtr7q-ETkpM-Kxwc?usp=sharing) for a quickstart without downloading anything on your local machine.
 
 ## Local Deployment
 

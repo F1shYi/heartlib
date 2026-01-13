@@ -4,8 +4,8 @@
         <img src="./.assets/logo.png" width="40%">
     </picture>
     <picture>
-        <source srcset="./.assets/black_pku_logo.png" media="(prefers-color-scheme: dark)">
-        <img src="./.assets/black_pku_logo.png" width="35%">
+        <source srcset="./.assets/pku_logo.png" media="(prefers-color-scheme: dark)">
+        <img src="./.assets/pku_logo.png" width="35%">
     </picture>
 </p>
 
@@ -29,7 +29,7 @@
 
 HeartMuLa is a family of open sourced music foundation models including: 
 1. HeartCodec: a 12.5 hz music codec with high reconstruction fidelity;
-2. HeartMuLa: a music language model that generates music conditioned on lyrics and tags;
+2. HeartMuLa: a music language model that generates music conditioned on lyrics and tags with multilingual support including but not limited to English 🇺🇸, Chinese🇨🇳, Japanese🇯🇵, Korean🇰🇷 and Spanish🇪🇸.
 3. HeartTranscriptor: a whisper-based model specifically tuned for lyrics transcription;
 4. HeartCLAP: an audio–text alignment model that establishes a unified embedding space for music descriptions and cross-modal retrieval.
 
@@ -102,6 +102,54 @@ All parameters:
 - `--topk`: Top-k sampling parameter for generation (default: 50)
 - `--temperature`: Sampling temperature for generation (default: 1.0)
 - `--cfg_scale`: Classifier-free guidance scale (default: 1.5)
+
+Recommended format of lyrics and tags:
+```txt
+[Intro]
+
+[Verse]
+The sun creeps in across the floor
+I hear the traffic outside the door
+The coffee pot begins to hiss
+It is another morning just like this
+
+[Prechorus]
+The world keeps spinning round and round
+Feet are planted on the ground
+I find my rhythm in the sound
+
+[Chorus]
+Every day the light returns
+Every day the fire burns
+We keep on walking down this street
+Moving to the same steady beat
+It is the ordinary magic that we meet
+
+[Verse]
+The hours tick deeply into noon
+Chasing shadows,chasing the moon
+Work is done and the lights go low
+Watching the city start to glow
+
+[Bridge]
+It is not always easy,not always bright
+Sometimes we wrestle with the night
+But we make it to the morning light
+
+[Chorus]
+Every day the light returns
+Every day the fire burns
+We keep on walking down this street
+Moving to the same steady beat
+
+[Outro]
+Just another day
+Every single day
+```
+
+```txt
+Heartbreak,Strings,Ballad,synthesizer,Piano,Alone
+```
 #### 🎤 Lyrics Transcription
 
 To transcribe lyrics given music file, run:

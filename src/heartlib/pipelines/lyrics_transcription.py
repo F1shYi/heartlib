@@ -15,16 +15,14 @@ class HeartTranscriptorPipeline(AutomaticSpeechRecognitionPipeline):
     def from_pretrained(
         cls, pretrained_path: str, device: torch.device, dtype: torch.dtype
     ):
-        if os.path.exists(
-            hearttranscriptor_path := os.path.join(pretrained_path, "HeartTranscriptor")
-        ):
+        if os.path.exists(pretrained_path):
             model = WhisperForConditionalGeneration.from_pretrained(
-                hearttranscriptor_path, torch_dtype=dtype, low_cpu_mem_usage=True
+                pretrained_path, torch_dtype=dtype, low_cpu_mem_usage=True
             )
-            processor = WhisperProcessor.from_pretrained(hearttranscriptor_path)
+            processor = WhisperProcessor.from_pretrained(pretrained_path)
         else:
             raise FileNotFoundError(
-                f"Expected to find checkpoint for HeartCodec at {hearttranscriptor_path} but not found. Please check your folder {pretrained_path}."
+                f"Expected to find checkpoint for HeartTranscriptor at {pretrained_path} but not found. Please check your folder {pretrained_path}."
             )
 
         return cls(

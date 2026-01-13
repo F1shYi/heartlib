@@ -1,0 +1,11 @@
+# 🎤 Lyrics Transcription
+
+To transcribe lyrics given music file, run:
+
+```
+python ./examples/run_lyrics_transcription.py --model_path=YOUR-CKPT-CACHE-PATH
+```
+
+By default this command will load the generated music file at `./assets/output.wav` and print the  transcribed lyrics. Use `--music_path` to specify the path to the music file.
+
+Note that our HeartTranscriptor is trained on separated vocal tracks. In this example usage part, we directly demonstrate on unseparated music tracks, which is purely for simplicity of illustration. We recommend using source separation tools like demucs to separate the tracks before transcribing lyrics to achieve better results.

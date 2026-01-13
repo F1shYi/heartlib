@@ -29,12 +29,14 @@
 
 HeartMuLa is a family of open sourced music foundation models including: 
 1. HeartCodec: a 12.5 hz music codec with high reconstruction fidelity;
-2. HeartMuLa: a music language model that generates music conditioned on lyrics and tags with multilingual support including but not limited to English 🇺🇸, Chinese🇨🇳, Japanese🇯🇵, Korean🇰🇷 and Spanish🇪🇸.
+2. HeartMuLa: a music language model that generates music conditioned on lyrics and tags with multilingual support including but not limited to English, Chinese, Japanese, Korean and Spanish.
 3. HeartTranscriptor: a whisper-based model specifically tuned for lyrics transcription;
 4. HeartCLAP: an audio–text alignment model that establishes a unified embedding space for music descriptions and cross-modal retrieval.
 
 
 ---
+
+Check [this page](./examples/README.md) for usage of HeartTranscriptor.
 
 ## 📰 News
 
@@ -81,8 +83,6 @@ modelscope download --model 'iStardust/heartmula-gen-tmp' --local_dir 'YOUR-CKPT
 ```
 
 ### ▶️ Example Usage
-
-#### 🎶 Music Generation
 
 To generate music, run:
 
@@ -150,21 +150,10 @@ Every single day
 ```txt
 Heartbreak,Strings,Ballad,synthesizer,Piano,Alone
 ```
-#### 🎤 Lyrics Transcription
-
-To transcribe lyrics given music file, run:
-
-```
-python ./examples/run_lyrics_transcription.py --model_path=YOUR-CKPT-CACHE-PATH
-```
-
-By default this command will load the generated music file at `./assets/output.wav` and print the  transcribed lyrics. Use `--music_path` to specify the path to the music file.
-
-Note that our HeartTranscriptor is trained on separated vocal tracks. In this example usage part, we directly demonstrate on unseparated music tracks, which is purely for simplicity of illustration. We recommend using source separation tools like demucs to separate the tracks before transcribing lyrics to achieve better results.
 
 ## 🙏 Acknowledgements
 
-This repository is developed on the basis of [ConversationTTS](https://github.com/Audio-Foundation-Models/ConversationTTS), [SongGeneration](https://github.com/tencent-ailab/SongGeneration), and [Transformers](https://github.com/huggingface/transformers/tree/main). We thank the authors for their open source contributions.
+This repository is developed on the basis of [ConversationTTS](https://github.com/Audio-Foundation-Models/ConversationTTS). We thank the authors for their open source contributions.
 
 ## ⚖️ License & Ethics Statement
 

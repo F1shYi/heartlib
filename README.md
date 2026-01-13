@@ -132,5 +132,14 @@ Creative Commons Attribution–NonCommercial 4.0 International License (CC BY-NC
 
 ## 📚 Citation
 
+```
+@article{heartmula2026,
+  author    = {HeartMuLa Teams},
+  title     = {HeartMuLa: A Family of Open Sourced Music Foundation Models},
+  journal   = {arXiv preprint},
+  year      = {2026},
+}
+```
+
 ## 📬 Contact
 If you are interested in HeartMuLa, feel free to reach us at heartmula.ai@gmail.com

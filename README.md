@@ -3,16 +3,25 @@
         <source srcset="./.assets/logo.png" media="(prefers-color-scheme: dark)">
         <img src="./.assets/logo.png" width="40%">
     </picture>
+    <picture>
+        <source srcset="./.assets/pku_logo.png" media="(prefers-color-scheme: dark)">
+        <img src="./.assets/pku_logo.png" width="40%">
+    </picture>
 </p>
 
 <p align="center">
-    <a href="https://heartmula.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="coming soon">Paper</a>
+    <a href="https://heartmula.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="">Paper</a>
     <br>
-    <a href="https://huggingface.co/m-a-p/YuE-s2-1B-general">HeartMuLa-7B 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/m-a-p/YuE-upsampler">HeartMuLa-3B 🤗</a>
-    <picture>
+    <a href="">HeartMuLa-7B 🤗</a> &nbsp;|&nbsp; <a href="">HeartMuLa-3B 🤗</a>
+    <br>
+    <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-7B">HeartMuLa-7B <picture>
         <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
         <img src="./.assets/badge.svg" width="20px">
-    </picture>
+    </picture></a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-3B">HeartMuLa-3B <picture>
+        <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
+        <img src="./.assets/badge.svg" width="20px">
+    </picture></a>
+    
 </p>
 
 ---
@@ -20,33 +29,43 @@
 
 HeartMuLa is a family of open sourced music foundation models including: 
 1. HeartCodec: a 12.5 hz music codec with high reconstruction fidelity;
-2. HeartMuLa: a 3B music language model that generates music conditioned on lyrics and tags;
+2. HeartMuLa: a music language model that generates music conditioned on lyrics and tags;
 3. HeartTranscriptor: a whisper-based model specifically tuned for lyrics transcription;
-4. HeartCLAP: 
-
-This repo accompanies our technical report (url here).
-
-## News & TODOs
-
-Jan. 2026: We are happy to release our first version of HeartMuLa. Happy New Year!
-
-TODOs:
-
-[ ] Release HeartCLAP.
-
-[ ] Support reference audio conditioning.
-
-[√] Release inference code and pretrained checkpoints of HeartCodec, HeartMuLa and HeartTranscriptor.
+4. HeartCLAP: an audio–text alignment model that establishes a unified embedding space for music descriptions and cross-modal retrieval.
 
 
-## Local Deployment
+---
 
-### Environment Setup
+## 📰 News
+
+- 🚀 **14 Jan. 2026**  
+  Our **7B HeartMuLa** achieves performance **comparable to Suno**.  
+  👉 Listen to samples and try it yourself at [our demo page](https://heartmula.github.io/).
+
+- 🎉 **01 Jan. 2026**  
+  The official release of **HeartTranscriptor**. Happy New Year!
+
+- 🎄 **25 Dec. 2025**  
+  We release the first **3B version of HeartMuLa**. Merry Christmas!
+
+---
+## 🧭 TODOs
+
+- ⏳ Release **HeartCLAP**
+- ⏳ Support **reference audio conditioning**
+- ✅ Release inference code and pretrained checkpoints of  
+  **HeartCodec, HeartMuLa, and HeartTranscriptor**
+
+---
+
+## 🛠️ Local Deployment
+
+### ⚙️ Environment Setup
 
 Clone this repo and install locally.
 
 ```
-git clone https://github.com/F1shYi/heartlib.git
+git clone xxx
 cd heartlib
 pip install -e .
 ```
@@ -61,7 +80,9 @@ hf download f1shy1/HeartMuLa --local-dir YOUR-CKPT-CACHE-PATH
 modelscope download --model 'iStardust/heartmula-gen-tmp' --local_dir 'YOUR-CKPT-CACHE-PATH'
 ```
 
-### Example Usage
+### ▶️ Example Usage
+
+#### 🎶 Music Generation
 
 To generate music, run:
 
@@ -81,6 +102,7 @@ All parameters:
 - `--topk`: Top-k sampling parameter for generation (default: 50)
 - `--temperature`: Sampling temperature for generation (default: 1.0)
 - `--cfg_scale`: Classifier-free guidance scale (default: 1.5)
+#### 🎤 Lyrics Transcription
 
 To transcribe lyrics given music file, run:
 
@@ -92,21 +114,23 @@ By default this command will load the generated music file at `./assets/output.w
 
 Note that our HeartTranscriptor is trained on separated vocal tracks. In this example usage part, we directly demonstrate on unseparated music tracks, which is purely for simplicity of illustration. We recommend using source separation tools like demucs to separate the tracks before transcribing lyrics to achieve better results.
 
-## Acknowledgement
+## 🙏 Acknowledgements
 
 This repository is developed on the basis of [ConversationTTS](https://github.com/Audio-Foundation-Models/ConversationTTS), [SongGeneration](https://github.com/tencent-ailab/SongGeneration), and [Transformers](https://github.com/huggingface/transformers/tree/main). We thank the authors for their open source contributions.
 
+## ⚖️ License & Ethics Statement
 
-## License & Ethics Statement
+This repository is licensed under the
+Creative Commons Attribution–NonCommercial 4.0 International License (CC BY-NC 4.0).
 
-This repository is licensed under the **Creative Commons Attribution–NonCommercial 4.0 International License (CC BY-NC 4.0)**.
+🔒 For non-commercial research and educational use only
+
+🚫 Any commercial use is strictly prohibited
+
+⚠️ Users are solely responsible for ensuring that generated content does not infringe any third-party copyrights
 
 
-The music generation model and all associated assets are provided for non-commercial research and educational purposes only. **Any commercial use is strictly prohibited.**
+## 📚 Citation
 
-Users are solely responsible for ensuring that the generated content does not infringe upon any third-party copyrights or other intellectual property rights.
-
-## Citation
-
-## Contact Us
+## 📬 Contact
 If you are interested in HeartMuLa, feel free to reach us at heartmula.ai@gmail.com

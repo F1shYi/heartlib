@@ -40,7 +40,7 @@ HeartMuLa is a family of open sourced music foundation models including:
 
 - 🚀 **14 Jan. 2026**  
   Our **7B HeartMuLa** achieves performance **comparable to Suno**.  
-  👉 Listen to samples and try it yourself at [our demo page](https://heartmula.github.io/).
+  👉 Download [the newest checkpoint]() and try it yourself!
 
 - 🎉 **01 Jan. 2026**  
   The official release of **HeartTranscriptor**. Happy New Year!

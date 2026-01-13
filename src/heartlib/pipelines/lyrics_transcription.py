@@ -16,7 +16,7 @@ class HeartTranscriptorPipeline(AutomaticSpeechRecognitionPipeline):
         cls, pretrained_path: str, device: torch.device, dtype: torch.dtype
     ):
         if os.path.exists(
-            hearttranscriptor_path := os.path.join(pretrained_path, "hearttranscriptor")
+            hearttranscriptor_path := os.path.join(pretrained_path, "HeartTranscriptor")
         ):
             model = WhisperForConditionalGeneration.from_pretrained(
                 hearttranscriptor_path, torch_dtype=dtype, low_cpu_mem_usage=True

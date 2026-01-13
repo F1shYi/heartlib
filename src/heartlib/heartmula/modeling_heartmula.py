@@ -40,9 +40,43 @@ def llama3_2_300M() -> torchtune.modules.transformer.TransformerDecoder:
     )
 
 
+def llama3_2_7B() -> torchtune.modules.transformer.TransformerDecoder:
+    return llama3_2.llama3_2(
+        vocab_size=128_256,
+        num_layers=32,
+        num_heads=32,
+        num_kv_heads=8,
+        embed_dim=4096,
+        max_seq_len=8192,
+        intermediate_dim=14336,
+        attn_dropout=0.0,
+        norm_eps=1e-5,
+        rope_base=500_000,
+        scale_factor=32,
+    )
+
+
+def llama3_2_400M() -> torchtune.modules.transformer.TransformerDecoder:
+    return llama3_2.llama3_2(
+        vocab_size=128_256,
+        num_layers=4,
+        num_heads=8,
+        num_kv_heads=4,
+        embed_dim=3072,
+        max_seq_len=2048,
+        intermediate_dim=8192,
+        attn_dropout=0.0,
+        norm_eps=1e-5,
+        rope_base=500_000,
+        scale_factor=32,
+    )  # 减少了num_heads和num_kv_heads之间的倍速，提升了精确度，但降低了效率
+
+
 FLAVORS = {
     "llama-3B": llama3_2_3B,
     "llama-300M": llama3_2_300M,
+    "llama-7B": llama3_2_7B,
+    "llama-400M": llama3_2_400M,
 }
 
 

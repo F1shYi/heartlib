@@ -208,11 +208,12 @@ class HeartMuLaGenPipeline(Pipeline):
         pretrained_path: str,
         device: torch.device,
         dtype: torch.dtype,
+        version: str,
         bnb_config: Optional[BitsAndBytesConfig] = None,
     ):
 
         if os.path.exists(
-            heartcodec_path := os.path.join(pretrained_path, "heartcodec")
+            heartcodec_path := os.path.join(pretrained_path, "HeartCodec")
         ):
             heartcodec = HeartCodec.from_pretrained(heartcodec_path, device_map=device)
         else:
@@ -220,7 +221,9 @@ class HeartMuLaGenPipeline(Pipeline):
                 f"Expected to find checkpoint for HeartCodec at {heartcodec_path} but not found. Please check your folder {pretrained_path}."
             )
 
-        if os.path.exists(heartmula_path := os.path.join(pretrained_path, "heartmula")):
+        if os.path.exists(
+            heartmula_path := os.path.join(pretrained_path, f"HeartMuLa-{version}")
+        ):
             heartmula = HeartMuLa.from_pretrained(
                 heartmula_path, dtype=dtype, quantization_config=bnb_config
             )

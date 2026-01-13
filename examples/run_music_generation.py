@@ -20,7 +20,7 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     pipe = HeartMuLaGenPipeline.from_pretrained(
-        args.model_path, device=torch.device("cuda"), dtype=torch.bfloat16
+        args.model_path, device=torch.device("cuda"), dtype=torch.bfloat16, version="7B"
     )
     with torch.no_grad():
         pipe(

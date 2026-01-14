@@ -52,16 +52,14 @@ Our latest internal version of HeartMuLa achieves **comparable performance with 
 - 🚀 **14 Jan. 2026**  
   Our **oss-7B HeartMuLa** is released!
 
-
   The official release of **HeartTranscriptor**.
-
 
   We release the first **oss-3B version of HeartMuLa**.
 
 ---
 ## 🧭 TODOs
 
-- ⏳ Release scripts for inference acceleration and streaming inference. The current inference speed is around
+- ⏳ Release scripts for inference acceleration and streaming inference. The current inference speed is around RTF $\approx 1.0$.
 - ⏳ Release **HeartCLAP**.
 - ⏳ Support **reference audio conditioning**.
 - ✅ Release inference code and pretrained checkpoints of  

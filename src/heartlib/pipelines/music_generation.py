@@ -216,7 +216,7 @@ class HeartMuLaGenPipeline(Pipeline):
     ):
 
         if os.path.exists(
-            heartcodec_path := os.path.join(pretrained_path, "HeartCodec")
+            heartcodec_path := os.path.join(pretrained_path, "HeartCodec-oss")
         ):
             heartcodec = HeartCodec.from_pretrained(heartcodec_path, device_map=device)
         else:
@@ -225,7 +225,7 @@ class HeartMuLaGenPipeline(Pipeline):
             )
 
         if os.path.exists(
-            heartmula_path := os.path.join(pretrained_path, f"HeartMuLa-{version}")
+            heartmula_path := os.path.join(pretrained_path, f"HeartMuLa-oss-{version}")
         ):
             heartmula = HeartMuLa.from_pretrained(
                 heartmula_path, dtype=dtype, quantization_config=bnb_config

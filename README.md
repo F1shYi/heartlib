@@ -33,15 +33,23 @@ HeartMuLa is a family of open sourced music foundation models including:
 
 Check [this page](./examples/README.md) for usage of HeartTranscriptor.
 
+<p align="center">
+    <picture>
+        <source srcset="./.assets/exp.png" media="(prefers-color-scheme: dark)">
+        <img src="./.assets/exp.png" width="90%">
+    </picture>
+    
+</p>
+
 ## 📰 News
 
 - 🚀 **14 Jan. 2026**  
   Our **oss-7B HeartMuLa** is released! Our latest internal version of HeartMuLa achieves **comparable performance with Suno** in terms of musicality, fidelity and controllability. If you are interested, welcome to reach us out via heartmula.ai@gmail.com
 
-- 🎉 **14 Jan. 2026**  
+
   The official release of **HeartTranscriptor**.
 
-- 🎄 **14 Jan. 2026**  
+
   We release the first **oss-3B version of HeartMuLa**.
 
 ---

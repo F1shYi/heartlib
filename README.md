@@ -40,7 +40,7 @@ Below shows the experiment result of our oss-3B version compared with other base
 
 ## 🔥 Highlight
 
-Our latest internal version of HeartMuLa achieves **comparable performance with Suno** in terms of musicality, fidelity and controllability. If you are interested, welcome to reach us out via heartmula.ai@gmail.com
+Our latest internal version of HeartMuLa-7B achieves **comparable performance with Suno** in terms of musicality, fidelity and controllability. If you are interested, welcome to reach us out via heartmula.ai@gmail.com
 
 ## 📰 News
 

@@ -27,11 +27,10 @@
 HeartMuLa is a family of open sourced music foundation models including: 
 1. HeartMuLa: a music language model that generates music conditioned on lyrics and tags with multilingual support including but not limited to English, Chinese, Japanese, Korean and Spanish.
 2. HeartCodec: a 12.5 hz music codec with high reconstruction fidelity;
-3. HeartTranscriptor: a whisper-based model specifically tuned for lyrics transcription;
+3. HeartTranscriptor: a whisper-based model specifically tuned for lyrics transcription; Check [this page](./examples/README.md) for its usage.
 4. HeartCLAP: an audio–text alignment model that establishes a unified embedding space for music descriptions and cross-modal retrieval.
 ---
 
-Check [this page](./examples/README.md) for usage of HeartTranscriptor.
 
 Below shows the experiment result of our oss-3B version compared with other baselines.
 <p align="center">

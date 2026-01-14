@@ -2,8 +2,8 @@
 
 Download checkpoint using any of the following command:
 ```
-hf download --model 'HeartMuLa/HeartTranscriptor' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartTranscriptor'
-modelscope download --model 'HeartMuLa/HeartTranscriptor' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartTranscriptor'
+hf download --model 'HeartMuLa/HeartTranscriptor-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartTranscriptor-oss'
+modelscope download --model 'HeartMuLa/HeartTranscriptor-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartTranscriptor-oss'
 ```
 
 ```

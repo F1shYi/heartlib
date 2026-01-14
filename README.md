@@ -45,7 +45,7 @@ Our latest internal version of HeartMuLa achieves **comparable performance with 
 ## 📰 News
 
 - 🚀 **14 Jan. 2026**  
-  The official release of **HeartTranscriptor** and the first **oss-3B version of HeartMuLa**.
+  The official release of **HeartTranscriptor-oss** and the first **HeartMuLa-oss-3B** version.
 
 ---
 ## 🧭 TODOs
@@ -55,7 +55,7 @@ Our latest internal version of HeartMuLa achieves **comparable performance with 
 - ⏳ Support **reference audio conditioning**.
 - ⏳ Release the **HeartMuLa-oss-7B** version.
 - ✅ Release inference code and pretrained checkpoints of  
-  **HeartCodec-oss, HeartMuLa-oss-3B, and HeartTranscriptor**.
+  **HeartCodec-oss, HeartMuLa-oss-3B, and HeartTranscriptor-oss**.
 
 ---
 

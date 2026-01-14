@@ -9,12 +9,7 @@
 <p align="center">
     <a href="https://heartmula.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="">Paper (Coming Soon)</a>
     <br>
-    <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-7B">HeartMuLa-oss-7B 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-oss-3B 🤗</a>
-    <br>
-    <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-7B">HeartMuLa-oss-7B <picture>
-        <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
-        <img src="./.assets/badge.svg" width="20px">
-    </picture></a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-oss-3B <picture>
+    <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-oss-3B 🤗</a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-oss-3B <picture>
         <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
         <img src="./.assets/badge.svg" width="20px">
     </picture></a>
@@ -50,11 +45,7 @@ Our latest internal version of HeartMuLa achieves **comparable performance with 
 ## 📰 News
 
 - 🚀 **14 Jan. 2026**  
-  Our **oss-7B HeartMuLa** is released!
-
-  The official release of **HeartTranscriptor**.
-
-  We release the first **oss-3B version of HeartMuLa**.
+  The official release of **HeartTranscriptor** and the first **oss-3B version of HeartMuLa**.
 
 ---
 ## 🧭 TODOs
@@ -62,8 +53,9 @@ Our latest internal version of HeartMuLa achieves **comparable performance with 
 - ⏳ Release scripts for inference acceleration and streaming inference. The current inference speed is around RTF $\approx 1.0$.
 - ⏳ Release **HeartCLAP**.
 - ⏳ Support **reference audio conditioning**.
+- ⏳ Release the **HeartMuLa-oss-7B** version.
 - ✅ Release inference code and pretrained checkpoints of  
-  **HeartCodec-oss, HeartMuLa-oss-3B, HeartMuLa-oss-7B, and HeartTranscriptor**.
+  **HeartCodec-oss, HeartMuLa-oss-3B, and HeartTranscriptor**.
 
 ---
 
@@ -87,13 +79,11 @@ Download our pretrained checkpoints from huggingface or modelscope using the fol
 # if you are using huggingface
 hf download --model 'HeartMuLa/HeartMuLaGen' --local_dir 'YOUR-CKPT-CACHE-PATH'
 hf download --model 'HeartMuLa/HeartMuLa-3B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-3B'
-hf download --model 'HeartMuLa/HeartMuLa-7B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-7B'
 hf download --model 'HeartMuLa/HeartCodec-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec-oss'
 
 # if you are using modelscope
 modelscope download --model 'HeartMuLa/HeartMuLaGen' --local_dir 'YOUR-CKPT-CACHE-PATH'
 modelscope download --model 'HeartMuLa/HeartMuLa-oss-3B' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-3B'
-modelscope download --model 'HeartMuLa/HeartMuLa-oss-7B' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-7B'
 modelscope download --model 'HeartMuLa/HeartCodec-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec-oss'
 ```
 
@@ -102,7 +92,6 @@ After downloading, the folder where checkpoints are saved should structured like
 YOUR-CKPT-CACHE-PATH/
 ├── HeartCodec-oss/
 ├── HeartMuLa-oss-3B/
-├── HeartMuLa-oss-7B/
 ├── gen_config.json
 └── tokenizer.json
 ```
@@ -128,7 +117,7 @@ All parameters:
 - `--topk`: Top-k sampling parameter for generation (default: 50)
 - `--temperature`: Sampling temperature for generation (default: 1.0)
 - `--cfg_scale`: Classifier-free guidance scale (default: 1.5)
-- `--version`: The version of HeartMuLa, choose between [`3B`, `7B`]. (default: `3B`)
+- `--version`: The version of HeartMuLa, choose between [`3B`, `7B`]. (default: `3B`) # `7B` version not released yet.
 
 Recommended format of lyrics and tags:
 ```txt

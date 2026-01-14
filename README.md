@@ -162,6 +162,7 @@ Just another day
 Every single day
 ```
 
+Our different tags are comma-separated without spaces as illustrated below:
 ```txt
 piano,happy,wedding,synthesizer,romantic
 ```

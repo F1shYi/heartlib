@@ -97,6 +97,8 @@ class HeartMuLaGenPipeline(Pipeline):
         assert isinstance(
             lyrics, str
         ), f"lyrics must be a string, but got {type(lyrics)}"
+        lyrics = lyrics.lower()
+
         lyrics_ids = self.text_tokenizer.encode(lyrics).ids
         if lyrics_ids[0] != self.config.text_bos_id:
             lyrics_ids = [self.config.text_bos_id] + lyrics_ids

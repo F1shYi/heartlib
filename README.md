@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
         <source srcset="./.assets/logo.png" media="(prefers-color-scheme: dark)">
-        <img src="./.assets/logo.png" width="80%">
+        <img src="./.assets/logo.png" width="30%">
     </picture>
     
 </p>

@@ -69,6 +69,7 @@ class HeartMuLaGenPipeline(Pipeline):
                 tags = fp.read()
         assert isinstance(tags, str), f"tags must be a string, but got {type(tags)}"
 
+        tags = tags.lower()
         # encapsulate with special <tag> and </tag> tokens
         if not tags.startswith("<tag>"):
             tags = f"<tag>{tags}"

@@ -9,12 +9,12 @@
 <p align="center">
     <a href="https://heartmula.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="">Paper (Coming Soon)</a>
     <br>
-    <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-7B">HeartMuLa-7B 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-3B 🤗</a>
+    <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-7B">HeartMuLa-oss-7B 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-oss-3B 🤗</a>
     <br>
-    <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-7B">HeartMuLa-7B <picture>
+    <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-7B">HeartMuLa-oss-7B <picture>
         <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
         <img src="./.assets/badge.svg" width="20px">
-    </picture></a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-3B <picture>
+    </picture></a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-oss-3B <picture>
         <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
         <img src="./.assets/badge.svg" width="20px">
     </picture></a>
@@ -25,8 +25,8 @@
 # HeartMuLa: A Family of Open Sourced Music Foundation Models
 
 HeartMuLa is a family of open sourced music foundation models including: 
-1. HeartCodec: a 12.5 hz music codec with high reconstruction fidelity;
-2. HeartMuLa: a music language model that generates music conditioned on lyrics and tags with multilingual support including but not limited to English, Chinese, Japanese, Korean and Spanish.
+1. HeartMuLa: a music language model that generates music conditioned on lyrics and tags with multilingual support including but not limited to English, Chinese, Japanese, Korean and Spanish.
+2. HeartCodec: a 12.5 hz music codec with high reconstruction fidelity;
 3. HeartTranscriptor: a whisper-based model specifically tuned for lyrics transcription;
 4. HeartCLAP: an audio–text alignment model that establishes a unified embedding space for music descriptions and cross-modal retrieval.
 ---
@@ -36,13 +36,13 @@ Check [this page](./examples/README.md) for usage of HeartTranscriptor.
 ## 📰 News
 
 - 🚀 **14 Jan. 2026**  
-  Our **7B HeartMuLa** achieves performance **comparable to Suno**.  
+  Our **oss-7B HeartMuLa** is released! Our latest internal version of HeartMuLa achieves **comparable performance with Suno** in terms of musicality, fidelity and controllability. If you are interested, welcome to reach us out via heartmula.ai@gmail.com
 
 - 🎉 **14 Jan. 2026**  
   The official release of **HeartTranscriptor**.
 
 - 🎄 **14 Jan. 2026**  
-  We release the first **3B version of HeartMuLa**.
+  We release the first **oss-3B version of HeartMuLa**.
 
 ---
 ## 🧭 TODOs
@@ -74,14 +74,14 @@ Download our pretrained checkpoints from huggingface or modelscope using the fol
 ```
 # if you are using huggingface
 hf download --model 'HeartMuLa/HeartMuLaGen' --local_dir 'YOUR-CKPT-CACHE-PATH'
-hf download --model 'HeartMuLa/HeartMuLa-3B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-3B-oss'
-hf download --model 'HeartMuLa/HeartMuLa-7B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-7B-oss'
+hf download --model 'HeartMuLa/HeartMuLa-3B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-3B'
+hf download --model 'HeartMuLa/HeartMuLa-7B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-7B'
 hf download --model 'HeartMuLa/HeartCodec-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec-oss'
 
 # if you are using modelscope
 modelscope download --model 'HeartMuLa/HeartMuLaGen' --local_dir 'YOUR-CKPT-CACHE-PATH'
-modelscope download --model 'HeartMuLa/HeartMuLa-3B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-3B-oss'
-modelscope download --model 'HeartMuLa/HeartMuLa-7B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-7B-oss'
+modelscope download --model 'HeartMuLa/HeartMuLa-oss-3B' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-3B'
+modelscope download --model 'HeartMuLa/HeartMuLa-oss-7B' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-7B'
 modelscope download --model 'HeartMuLa/HeartCodec-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec-oss'
 ```
 
@@ -89,8 +89,8 @@ After downloading, the folder where checkpoints are saved should structured like
 ```
 YOUR-CKPT-CACHE-PATH/
 ├── HeartCodec-oss/
-├── HeartMuLa-3B-oss/
-├── HeartMuLa-7B-oss/
+├── HeartMuLa-oss-3B/
+├── HeartMuLa-oss-7B/
 ├── gen_config.json
 └── tokenizer.json
 ```
@@ -163,7 +163,7 @@ Every single day
 ```
 
 ```txt
-piano,happy
+piano,happy,wedding,synthesizer,romantic
 ```
 
 ## 🙏 Acknowledgements

@@ -51,7 +51,7 @@ Check [this page](./examples/README.md) for usage of HeartTranscriptor.
 - ⏳ Release **HeartCLAP**.
 - ⏳ Support **reference audio conditioning**.
 - ✅ Release inference code and pretrained checkpoints of  
-  **HeartCodec, HeartMuLa-3B, HeartMuLa-7B, and HeartTranscriptor**.
+  **HeartCodec, HeartMuLa-oss-3B, HeartMuLa-oss-7B, and HeartTranscriptor**.
 
 ---
 

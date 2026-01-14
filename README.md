@@ -33,6 +33,7 @@ HeartMuLa is a family of open sourced music foundation models including:
 
 Check [this page](./examples/README.md) for usage of HeartTranscriptor.
 
+Below shows the experiment result of our oss-3B version compared with other baselines.
 <p align="center">
     <picture>
         <source srcset="./.assets/exp.png" media="(prefers-color-scheme: dark)">

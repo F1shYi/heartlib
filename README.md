@@ -42,10 +42,16 @@ Below shows the experiment result of our oss-3B version compared with other base
     
 </p>
 
+---
+
+## 🔥 Highlight
+
+Our latest internal version of HeartMuLa achieves **comparable performance with Suno** in terms of musicality, fidelity and controllability. If you are interested, welcome to reach us out via heartmula.ai@gmail.com
+
 ## 📰 News
 
 - 🚀 **14 Jan. 2026**  
-  Our **oss-7B HeartMuLa** is released! Our latest internal version of HeartMuLa achieves **comparable performance with Suno** in terms of musicality, fidelity and controllability. If you are interested, welcome to reach us out via heartmula.ai@gmail.com
+  Our **oss-7B HeartMuLa** is released!
 
 
   The official release of **HeartTranscriptor**.
@@ -56,7 +62,7 @@ Below shows the experiment result of our oss-3B version compared with other base
 ---
 ## 🧭 TODOs
 
-- ⏳ Release scripts for inference acceleration.
+- ⏳ Release scripts for inference acceleration and streaming inference. The current inference speed is around
 - ⏳ Release **HeartCLAP**.
 - ⏳ Support **reference audio conditioning**.
 - ✅ Release inference code and pretrained checkpoints of  
@@ -113,7 +119,7 @@ To generate music, run:
 python ./examples/run_music_generation.py --model_path=YOUR-CKPT-CACHE-PATH --version="3B"
 ```
 
-By default this command will generate a piece of music conditioned on lyrics and tags provided in `./assets` folder. The output music will be saved at `./assets/output.wav`. The current generation speed is about RTF=1.0 (i.e. it takes around 90 seconds to generate a 90-seconds song), and the inference acceleration support will be released in the future.
+By default this command will generate a piece of music conditioned on lyrics and tags provided in `./assets` folder. The output music will be saved at `./assets/output.wav`.
 
 All parameters:
 
@@ -176,6 +182,8 @@ Our different tags are comma-separated without spaces as illustrated below:
 piano,happy,wedding,synthesizer,romantic
 ```
 
+---
+
 ## 🙏 Acknowledgements
 
 This repository is developed on the basis of [ConversationTTS](https://github.com/Audio-Foundation-Models/ConversationTTS). We thank the authors for their open source contributions.
@@ -191,6 +199,7 @@ Creative Commons Attribution–NonCommercial 4.0 International License (CC BY-NC
 
 ⚠️ Users are solely responsible for ensuring that generated content does not infringe any third-party copyrights
 
+---
 
 ## 📚 Citation
 

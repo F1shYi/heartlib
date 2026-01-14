@@ -38,3 +38,4 @@ if __name__ == "__main__":
             temperature=args.temperature,
             cfg_scale=args.cfg_scale,
         )
+    print(f"Generated music saved to {args.save_path}")

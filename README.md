@@ -7,14 +7,14 @@
 </p>
 
 <p align="center">
-    <a href="https://heartmula.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="">Paper</a>
+    <a href="https://heartmula.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="">Paper (Coming Soon)</a>
     <br>
-    <a href="">HeartMuLa-7B 🤗</a> &nbsp;|&nbsp; <a href="">HeartMuLa-3B 🤗</a>
+    <a href="https://huggingface.co/HeartMuLa/HeartMuLa-7B-oss">HeartMuLa-7B 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/HeartMuLa/HeartMuLa-3B-oss">HeartMuLa-3B 🤗</a>
     <br>
-    <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-7B">HeartMuLa-7B <picture>
+    <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-7B-oss">HeartMuLa-7B <picture>
         <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
         <img src="./.assets/badge.svg" width="20px">
-    </picture></a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-3B">HeartMuLa-3B <picture>
+    </picture></a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-3B-oss">HeartMuLa-3B <picture>
         <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
         <img src="./.assets/badge.svg" width="20px">
     </picture></a>
@@ -29,8 +29,6 @@ HeartMuLa is a family of open sourced music foundation models including:
 2. HeartMuLa: a music language model that generates music conditioned on lyrics and tags with multilingual support including but not limited to English, Chinese, Japanese, Korean and Spanish.
 3. HeartTranscriptor: a whisper-based model specifically tuned for lyrics transcription;
 4. HeartCLAP: an audio–text alignment model that establishes a unified embedding space for music descriptions and cross-modal retrieval.
-
-
 ---
 
 Check [this page](./examples/README.md) for usage of HeartTranscriptor.
@@ -49,16 +47,19 @@ Check [this page](./examples/README.md) for usage of HeartTranscriptor.
 ---
 ## 🧭 TODOs
 
-- ⏳ Release **HeartCLAP**
-- ⏳ Support **reference audio conditioning**
+- ⏳ Release scripts for inference acceleration.
+- ⏳ Release **HeartCLAP**.
+- ⏳ Support **reference audio conditioning**.
 - ✅ Release inference code and pretrained checkpoints of  
-  **HeartCodec, HeartMuLa-3B, HeartMuLa-7B, and HeartTranscriptor**
+  **HeartCodec, HeartMuLa-3B, HeartMuLa-7B, and HeartTranscriptor**.
 
 ---
 
 ## 🛠️ Local Deployment
 
 ### ⚙️ Environment Setup
+
+We recommend using `python=3.10` for local deployment.
 
 Clone this repo and install locally.
 
@@ -72,21 +73,35 @@ Download our pretrained checkpoints from huggingface or modelscope using the fol
 
 ```
 # if you are using huggingface
-hf download f1shy1/HeartMuLa --local-dir YOUR-CKPT-CACHE-PATH
+hf download --model 'HeartMuLa/HeartMuLaGen' --local_dir 'YOUR-CKPT-CACHE-PATH'
+hf download --model 'HeartMuLa/HeartMuLa-3B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-3B-oss'
+hf download --model 'HeartMuLa/HeartMuLa-7B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-7B-oss'
+hf download --model 'HeartMuLa/HeartCodec-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec-oss'
 
 # if you are using modelscope
 modelscope download --model 'HeartMuLa/HeartMuLaGen' --local_dir 'YOUR-CKPT-CACHE-PATH'
-modelscope download --model 'HeartMuLa/HeartMuLa-3B' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-3B'
-modelscope download --model 'HeartMuLa/HeartMuLa-7B' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-7B'
-modelscope download --model 'HeartMuLa/HeartCodec' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec'
+modelscope download --model 'HeartMuLa/HeartMuLa-3B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-3B-oss'
+modelscope download --model 'HeartMuLa/HeartMuLa-7B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-7B-oss'
+modelscope download --model 'HeartMuLa/HeartCodec-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec-oss'
 ```
+
+After downloading, the folder where checkpoints are saved should structured like this:
+```
+YOUR-CKPT-CACHE-PATH/
+├── HeartCodec-oss/
+├── HeartMuLa-3B-oss/
+├── HeartMuLa-7B-oss/
+├── gen_config.json
+└── tokenizer.json
+```
+
 
 ### ▶️ Example Usage
 
 To generate music, run:
 
 ```
-python ./examples/run_music_generation.py --model_path=YOUR-CKPT-CACHE-PATH
+python ./examples/run_music_generation.py --model_path=YOUR-CKPT-CACHE-PATH --version="3B"
 ```
 
 By default this command will generate a 30-seconds music clip conditioned on lyrics and tags provided in `./assets` folder. The output music will be saved at `./assets/output.wav`. 
@@ -97,11 +112,12 @@ All parameters:
 - `--lyrics`: Path to lyrics file (default: `./.assets/lyrics.txt`)
 - `--tags`: Path to tags file (default: `./.assets/tags.txt`)
 - `--save_path`: Output audio file path (default: `./.assets/output.wav`)
-- `--max_audio_length_ms`: Maximum audio length in milliseconds (default: 40000)
+- `--max_audio_length_ms`: Maximum audio length in milliseconds (default: 240000)
 - `--topk`: Top-k sampling parameter for generation (default: 50)
 - `--temperature`: Sampling temperature for generation (default: 1.0)
 - `--cfg_scale`: Classifier-free guidance scale (default: 1.5)
 - `--version`: The version of HeartMuLa, choose between [`3B`, `7B`]. (default: `3B`)
+
 Recommended format of lyrics and tags:
 ```txt
 [Intro]

@@ -104,7 +104,7 @@ To generate music, run:
 python ./examples/run_music_generation.py --model_path=YOUR-CKPT-CACHE-PATH --version="3B"
 ```
 
-By default this command will generate a 30-seconds music clip conditioned on lyrics and tags provided in `./assets` folder. The output music will be saved at `./assets/output.wav`. 
+By default this command will generate a piece of music conditioned on lyrics and tags provided in `./assets` folder. The output music will be saved at `./assets/output.wav`. The current generation speed is about RTF=1.0 (i.e. it takes around 90 seconds to generate a 90-seconds song), and the inference acceleration support will be released in the future.
 
 All parameters:
 

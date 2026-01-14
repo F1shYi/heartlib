@@ -9,12 +9,12 @@
 <p align="center">
     <a href="https://heartmula.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="">Paper (Coming Soon)</a>
     <br>
-    <a href="https://huggingface.co/HeartMuLa/HeartMuLa-7B-oss">HeartMuLa-7B 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/HeartMuLa/HeartMuLa-3B-oss">HeartMuLa-3B 🤗</a>
+    <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-7B">HeartMuLa-7B 🤗</a> &nbsp;|&nbsp; <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-3B 🤗</a>
     <br>
-    <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-7B-oss">HeartMuLa-7B <picture>
+    <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-7B">HeartMuLa-7B <picture>
         <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
         <img src="./.assets/badge.svg" width="20px">
-    </picture></a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-3B-oss">HeartMuLa-3B <picture>
+    </picture></a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-3B <picture>
         <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
         <img src="./.assets/badge.svg" width="20px">
     </picture></a>
@@ -163,7 +163,7 @@ Every single day
 ```
 
 ```txt
-Heartbreak,Strings,Ballad,synthesizer,Piano,Alone
+piano,happy
 ```
 
 ## 🙏 Acknowledgements

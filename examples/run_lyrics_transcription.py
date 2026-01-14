@@ -18,17 +18,18 @@ if __name__ == "__main__":
         device=torch.device("cuda"),
         dtype=torch.float16,
     )
-    result = pipe(
-        args.music_path,
-        **{
-            "max_new_tokens": 256,
-            "num_beams": 2,
-            "task": "transcribe",
-            "condition_on_prev_tokens": False,
-            "compression_ratio_threshold": 1.8,
-            "temperature": (0.0, 0.1, 0.2, 0.4),
-            "logprob_threshold": -1.0,
-            "no_speech_threshold": 0.4,
-        },
-    )
+    with torch.no_grad():
+        result = pipe(
+            args.music_path,
+            **{
+                "max_new_tokens": 256,
+                "num_beams": 2,
+                "task": "transcribe",
+                "condition_on_prev_tokens": False,
+                "compression_ratio_threshold": 1.8,
+                "temperature": (0.0, 0.1, 0.2, 0.4),
+                "logprob_threshold": -1.0,
+                "no_speech_threshold": 0.4,
+            },
+        )
     print(result)

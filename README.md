@@ -1,12 +1,9 @@
 <p align="center">
     <picture>
         <source srcset="./.assets/logo.png" media="(prefers-color-scheme: dark)">
-        <img src="./.assets/logo.png" width="40%">
+        <img src="./.assets/logo.png" width="80%">
     </picture>
-    <picture>
-        <source srcset="./.assets/pku_logo.png" media="(prefers-color-scheme: dark)">
-        <img src="./.assets/pku_logo.png" width="35%">
-    </picture>
+    
 </p>
 
 <p align="center">
@@ -79,7 +76,10 @@ Download our pretrained checkpoints from huggingface or modelscope using the fol
 hf download f1shy1/HeartMuLa --local-dir YOUR-CKPT-CACHE-PATH
 
 # if you are using modelscope
-modelscope download --model 'iStardust/heartmula-gen-tmp' --local_dir 'YOUR-CKPT-CACHE-PATH'
+modelscope download --model 'HeartMuLa/HeartMuLaGen' --local_dir 'YOUR-CKPT-CACHE-PATH'
+modelscope download --model 'HeartMuLa/HeartMuLa-3B' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-3B'
+modelscope download --model 'HeartMuLa/HeartMuLa-7B' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-7B'
+modelscope download --model 'HeartMuLa/HeartCodec' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec'
 ```
 
 ### ▶️ Example Usage

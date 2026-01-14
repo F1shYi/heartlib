@@ -39,13 +39,12 @@ Check [this page](./examples/README.md) for usage of HeartTranscriptor.
 
 - 🚀 **14 Jan. 2026**  
   Our **7B HeartMuLa** achieves performance **comparable to Suno**.  
-  👉 Download [the newest checkpoint]() and try it yourself!
 
-- 🎉 **01 Jan. 2026**  
-  The official release of **HeartTranscriptor**. Happy New Year!
+- 🎉 **14 Jan. 2026**  
+  The official release of **HeartTranscriptor**.
 
-- 🎄 **25 Dec. 2025**  
-  We release the first **3B version of HeartMuLa**. Merry Christmas!
+- 🎄 **14 Jan. 2026**  
+  We release the first **3B version of HeartMuLa**.
 
 ---
 ## 🧭 TODOs
@@ -53,7 +52,7 @@ Check [this page](./examples/README.md) for usage of HeartTranscriptor.
 - ⏳ Release **HeartCLAP**
 - ⏳ Support **reference audio conditioning**
 - ✅ Release inference code and pretrained checkpoints of  
-  **HeartCodec, HeartMuLa, and HeartTranscriptor**
+  **HeartCodec, HeartMuLa-3B, HeartMuLa-7B, and HeartTranscriptor**
 
 ---
 
@@ -102,7 +101,7 @@ All parameters:
 - `--topk`: Top-k sampling parameter for generation (default: 50)
 - `--temperature`: Sampling temperature for generation (default: 1.0)
 - `--cfg_scale`: Classifier-free guidance scale (default: 1.5)
-
+- `--version`: The version of HeartMuLa, choose between [`3B`, `7B`]. (default: `3B`)
 Recommended format of lyrics and tags:
 ```txt
 [Intro]

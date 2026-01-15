@@ -6,7 +6,7 @@ import torch
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_path", type=str, required=True)
-    parser.add_argument("--music_path", type=str, default="./.assets/output.wav")
+    parser.add_argument("--music_path", type=str, default="./assets/output.mp3")
 
     return parser.parse_args()
 

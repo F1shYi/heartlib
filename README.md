@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
-        <source srcset="./.assets/logo.png" media="(prefers-color-scheme: dark)">
-        <img src="./.assets/logo.png" width="30%">
+        <source srcset="./assets/logo.png" media="(prefers-color-scheme: dark)">
+        <img src="./assets/logo.png" width="30%">
     </picture>
     
 </p>
@@ -10,8 +10,8 @@
     <a href="https://heartmula.github.io/">Demo 🎶</a> &nbsp;|&nbsp; 📑 <a href="">Paper (Coming Soon)</a>
     <br>
     <a href="https://huggingface.co/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-oss-3B 🤗</a> &nbsp;|&nbsp; <a href="https://modelscope.cn/models/HeartMuLa/HeartMuLa-oss-3B">HeartMuLa-oss-3B <picture>
-        <source srcset="./.assets/badge.svg" media="(prefers-color-scheme: dark)">
-        <img src="./.assets/badge.svg" width="20px">
+        <source srcset="./assets/badge.svg" media="(prefers-color-scheme: dark)">
+        <img src="./assets/badge.svg" width="20px">
     </picture></a>
     
 </p>
@@ -30,8 +30,8 @@ HeartMuLa is a family of open sourced music foundation models including:
 Below shows the experiment result of our oss-3B version compared with other baselines.
 <p align="center">
     <picture>
-        <source srcset="./.assets/exp.png" media="(prefers-color-scheme: dark)">
-        <img src="./.assets/exp.png" width="90%">
+        <source srcset="./assets/exp.png" media="(prefers-color-scheme: dark)">
+        <img src="./assets/exp.png" width="90%">
     </picture>
     
 </p>
@@ -77,19 +77,19 @@ Download our pretrained checkpoints from huggingface or modelscope using the fol
 
 ```
 # if you are using huggingface
-hf download --model 'HeartMuLa/HeartMuLaGen' --local_dir 'YOUR-CKPT-CACHE-PATH'
-hf download --model 'HeartMuLa/HeartMuLa-3B-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-3B'
-hf download --model 'HeartMuLa/HeartCodec-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec-oss'
+hf download --model 'HeartMuLa/HeartMuLaGen' --local_dir './ckpt'
+hf download --model 'HeartMuLa/HeartMuLa-3B-oss' --local_dir './ckpt/HeartMuLa-oss-3B'
+hf download --model 'HeartMuLa/HeartCodec-oss' --local_dir './ckpt/HeartCodec-oss'
 
 # if you are using modelscope
-modelscope download --model 'HeartMuLa/HeartMuLaGen' --local_dir 'YOUR-CKPT-CACHE-PATH'
-modelscope download --model 'HeartMuLa/HeartMuLa-oss-3B' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartMuLa-oss-3B'
-modelscope download --model 'HeartMuLa/HeartCodec-oss' --local_dir 'YOUR-CKPT-CACHE-PATH/HeartCodec-oss'
+modelscope download --model 'HeartMuLa/HeartMuLaGen' --local_dir './ckpt'
+modelscope download --model 'HeartMuLa/HeartMuLa-oss-3B' --local_dir './ckpt/HeartMuLa-oss-3B'
+modelscope download --model 'HeartMuLa/HeartCodec-oss' --local_dir './ckpt/HeartCodec-oss'
 ```
 
-After downloading, the folder where checkpoints are saved should structured like this:
+After downloading, the `./ckpt` subfolder should structure like this:
 ```
-YOUR-CKPT-CACHE-PATH/
+./ckpt/
 ├── HeartCodec-oss/
 ├── HeartMuLa-oss-3B/
 ├── gen_config.json
@@ -102,7 +102,7 @@ YOUR-CKPT-CACHE-PATH/
 To generate music, run:
 
 ```
-python ./examples/run_music_generation.py --model_path=YOUR-CKPT-CACHE-PATH --version="3B"
+python ./examples/run_music_generation.py --model_path=./ckpt --version="3B"
 ```
 
 By default this command will generate a piece of music conditioned on lyrics and tags provided in `./assets` folder. The output music will be saved at `./assets/output.mp3`.
@@ -110,9 +110,9 @@ By default this command will generate a piece of music conditioned on lyrics and
 All parameters:
 
 - `--model_path` (required): Path to the pretrained model checkpoint
-- `--lyrics`: Path to lyrics file (default: `./.assets/lyrics.txt`)
-- `--tags`: Path to tags file (default: `./.assets/tags.txt`)
-- `--save_path`: Output audio file path (default: `./.assets/output.mp3`)
+- `--lyrics`: Path to lyrics file (default: `./assets/lyrics.txt`)
+- `--tags`: Path to tags file (default: `./assets/tags.txt`)
+- `--save_path`: Output audio file path (default: `./assets/output.mp3`)
 - `--max_audio_length_ms`: Maximum audio length in milliseconds (default: 240000)
 - `--topk`: Top-k sampling parameter for generation (default: 50)
 - `--temperature`: Sampling temperature for generation (default: 1.0)

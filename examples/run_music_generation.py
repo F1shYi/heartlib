@@ -7,9 +7,9 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_path", type=str, required=True)
     parser.add_argument("--version", type=str, default="3B")
-    parser.add_argument("--lyrics", type=str, default="./.assets/lyrics.txt")
-    parser.add_argument("--tags", type=str, default="./.assets/tags.txt")
-    parser.add_argument("--save_path", type=str, default="./.assets/output.mp3")
+    parser.add_argument("--lyrics", type=str, default="./assets/lyrics.txt")
+    parser.add_argument("--tags", type=str, default="./assets/tags.txt")
+    parser.add_argument("--save_path", type=str, default="./assets/output.mp3")
 
     parser.add_argument("--max_audio_length_ms", type=int, default=240_000)
     parser.add_argument("--topk", type=int, default=50)

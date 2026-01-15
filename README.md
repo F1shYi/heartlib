@@ -105,14 +105,14 @@ To generate music, run:
 python ./examples/run_music_generation.py --model_path=YOUR-CKPT-CACHE-PATH --version="3B"
 ```
 
-By default this command will generate a piece of music conditioned on lyrics and tags provided in `./assets` folder. The output music will be saved at `./assets/output.wav`.
+By default this command will generate a piece of music conditioned on lyrics and tags provided in `./assets` folder. The output music will be saved at `./assets/output.mp3`.
 
 All parameters:
 
 - `--model_path` (required): Path to the pretrained model checkpoint
 - `--lyrics`: Path to lyrics file (default: `./.assets/lyrics.txt`)
 - `--tags`: Path to tags file (default: `./.assets/tags.txt`)
-- `--save_path`: Output audio file path (default: `./.assets/output.wav`)
+- `--save_path`: Output audio file path (default: `./.assets/output.mp3`)
 - `--max_audio_length_ms`: Maximum audio length in milliseconds (default: 240000)
 - `--topk`: Top-k sampling parameter for generation (default: 50)
 - `--temperature`: Sampling temperature for generation (default: 1.0)

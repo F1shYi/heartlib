@@ -56,7 +56,7 @@ class HeartMuLaGenPipeline(Pipeline):
             "cfg_scale": kwargs.get("cfg_scale", 1.5),
         }
         postprocess_kwargs = {
-            "save_path": kwargs.get("save_path", "output.wav"),
+            "save_path": kwargs.get("save_path", "output.mp3"),
         }
         return preprocess_kwargs, forward_kwargs, postprocess_kwargs
 
